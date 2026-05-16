@@ -495,14 +495,19 @@ footer{
 <!-- COUNTDOWN -->
 <section class="countdown">
   <div class="cnt-label">⏳ Official Rug Countdown</div>
-  <div class="cnt-sub">"We told you. Mark your calendar."</div>
+  <div class="cnt-sub">"Starts on Launch Day. You'll know when." 🛡️</div>
   <div class="timer-row">
-    <div class="t-block"><div class="t-num" id="days">364</div><div class="t-unit">Days</div></div>
+    <div class="t-block"><div class="t-num" id="days">365</div><div class="t-unit">Days</div></div>
     <div class="t-block"><div class="t-num" id="hours">00</div><div class="t-unit">Hours</div></div>
     <div class="t-block"><div class="t-num" id="minutes">00</div><div class="t-unit">Minutes</div></div>
     <div class="t-block"><div class="t-num" id="seconds">00</div><div class="t-unit">Seconds</div></div>
   </div>
-  <div class="cnt-note">* After this, we're on a beach. <span>You were warned.</span> 🏖️</div>
+  <div style="margin-top:20px;">
+    <span style="font-family:'Space Mono',monospace;font-size:11px;background:rgba(37,99,235,0.15);border:1px solid rgba(96,165,250,0.3);color:var(--accent);padding:8px 20px;border-radius:100px;letter-spacing:3px;">
+      ⏸ PAUSED — AWAITING LAUNCH
+    </span>
+  </div>
+  <div class="cnt-note" style="margin-top:16px;">* After Day 365, we're on a beach. <span>You were warned.</span> 🏖️</div>
 </section>
 
 <div class="divider"></div>
@@ -840,21 +845,7 @@ footer{
 </footer>
 
 <script>
-const launch = new Date();
-launch.setDate(launch.getDate() + 364);
-function tick(){
-  const diff = launch - new Date();
-  if(diff<=0) return;
-  const d=Math.floor(diff/86400000);
-  const h=Math.floor((diff%86400000)/3600000);
-  const m=Math.floor((diff%3600000)/60000);
-  const s=Math.floor((diff%60000)/1000);
-  document.getElementById('days').textContent=String(d).padStart(3,'0');
-  document.getElementById('hours').textContent=String(h).padStart(2,'0');
-  document.getElementById('minutes').textContent=String(m).padStart(2,'0');
-  document.getElementById('seconds').textContent=String(s).padStart(2,'0');
-}
-setInterval(tick,1000);tick();
+// Countdown paused — starts on Launch Day
 
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
