@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>$NOTRUG — Protected. Locked. Safe.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --blue: #2563eb;
+  --blue-dark: #1d4ed8;
+  --blue-deep: #1e3a8a;
+  --blue-deeper: #0f172a;
+  --blue-glow: #3b82f6;
+  --blue-pale: #93c5fd;
+  --dark: #060d1a;
+  --dark2: #0a1628;
+  --dark3: #0d1f38;
+  --white: #f0f7ff;
+  --gray: #64748b;
+  --gray-light: #94a3b8;
+  --accent: #60a5fa;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+
+/* Shield grid bg */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    repeating-linear-gradient(0deg,rgba(37,99,235,0.04) 0,rgba(37,99,235,0.04) 1px,transparent 1px,transparent 40px),
+    repeating-linear-gradient(90deg,rgba(37,99,235,0.03) 0,rgba(37,99,235,0.03) 1px,transparent 1px,transparent 40px);
+  pointer-events:none;z-index:0;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 52px;
+  background:rgba(6,13,26,0.95);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(37,99,235,0.25);
+}
+
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;font-size:28px;
+  color:var(--white);letter-spacing:3px;
+  display:flex;align-items:center;gap(12px);gap:12px;
+}
+
+/* Mini shield logo */
+.nav-shield{
+  width:26px;height:30px;
+  background:var(--blue);
+  clip-path:polygon(50% 0%,100% 20%,100% 60%,50% 100%,0% 60%,0% 20%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:white;font-weight:900;
+  position:relative;flex-shrink:0;
+}
+.nav-shield::after{
+  content:'';position:absolute;inset:3px;
+  background:var(--blue-dark);
+  clip-path:polygon(50% 0%,100% 20%,100% 60%,50% 100%,0% 60%,0% 20%);
+}
+
+.nav-logo span{color:var(--accent);}
+nav ul{display:flex;gap:28px;list-style:none;}
+nav ul a{
+  font-family:'Space Mono',monospace;font-size:10px;
+  color:var(--gray);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color 0.2s;
+}
+nav ul a:hover{color:var(--accent);}
+.nav-cta{
+  background:var(--blue)!important;color:var(--white)!important;
+  padding:10px 22px;border-radius:4px;font-weight:700!important;
+  border:1px solid var(--blue-glow)!important;
+  transition:all 0.2s!important;
+}
+.nav-cta:hover{background:var(--blue-dark)!important;box-shadow:0 0 20px rgba(37,99,235,0.4)!important;}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:120px 24px 80px;position:relative;z-index:1;overflow:hidden;
+}
+
+.hero-glow{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 40%,rgba(37,99,235,0.15) 0%,transparent 70%),
+    radial-gradient(ellipse 30% 25% at 20% 80%,rgba(59,130,246,0.08) 0%,transparent 60%),
+    radial-gradient(ellipse 30% 25% at 80% 20%,rgba(29,78,216,0.06) 0%,transparent 60%);
+}
+
+/* Big background shield watermark */
+.hero-shield-bg{
+  position:absolute;
+  width:600px;height:700px;
+  background:var(--blue-deep);
+  clip-path:polygon(50% 0%,100% 18%,100% 58%,50% 100%,0% 58%,0% 18%);
+  opacity:0.06;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(37,99,235,0.15);
+  border:1px solid rgba(59,130,246,0.35);
+  padding:8px 20px;border-radius:100px;
+  font-family:'Space Mono',monospace;font-size:10px;
+  color:var(--blue-pale);letter-spacing:2px;
+  margin-bottom:48px;position:relative;z-index:2;
+  animation:fadeUp 0.8s ease both;
+}
+.dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+/* SHIELD LOGO CENTER */
+.hero-shield-wrap{
+  position:relative;z-index:2;
+  animation:fadeUp 0.8s 0.1s ease both;
+  margin-bottom:40px;
+}
+
+.shield-main{
+  width:200px;height:240px;margin:0 auto;
+  background:var(--blue);
+  clip-path:polygon(50% 0%,100% 18%,100% 60%,50% 100%,0% 60%,0% 18%);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  filter:drop-shadow(0 0 40px rgba(37,99,235,0.5));
+}
+
+.shield-inner{
+  width:172px;height:208px;
+  background:var(--blue-dark);
+  clip-path:polygon(50% 0%,100% 18%,100% 60%,50% 100%,0% 60%,0% 18%);
+  display:flex;align-items:center;justify-content:center;
+  position:absolute;
+}
+
+.shield-icon{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* SVG no-rug circle X */
+.shield-svg{width:80px;height:80px;}
+
+.hero-title{
+  position:relative;z-index:2;
+  animation:fadeUp 0.8s 0.15s ease both;
+}
+
+h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(64px,12vw,130px);
+  line-height:0.9;letter-spacing:8px;
+  color:var(--white);
+  text-shadow:0 0 60px rgba(37,99,235,0.3);
+}
+
+h1 span{color:var(--accent);}
+
+.hero-tagline-top{
+  font-family:'Space Mono',monospace;font-size:11px;
+  color:var(--accent);letter-spacing:4px;text-transform:uppercase;
+  margin-bottom:8px;position:relative;z-index:2;
+  animation:fadeUp 0.8s 0.2s ease both;
+}
+
+.hero-sub{
+  font-family:'Space Mono',monospace;
+  font-size:clamp(11px,1.6vw,14px);
+  color:var(--gray-light);margin-top:24px;line-height:2.2;
+  position:relative;z-index:2;
+  animation:fadeUp 0.8s 0.25s ease both;
+  max-width:520px;
+}
+.hero-sub em{color:var(--accent);font-style:normal;font-weight:700;}
+.hero-sub strong{color:#f87171;}
+
+.hero-actions{
+  display:flex;gap:16px;margin-top:48px;flex-wrap:wrap;
+  justify-content:center;position:relative;z-index:2;
+  animation:fadeUp 0.8s 0.3s ease both;
+}
+
+.btn-p{
+  background:var(--blue);color:var(--white);
+  padding:16px 40px;border-radius:4px;
+  font-family:'Space Mono',monospace;font-size:12px;font-weight:700;
+  text-decoration:none;letter-spacing:2px;
+  border:1px solid var(--blue-glow);transition:all 0.2s;
+}
+.btn-p:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 8px 32px rgba(37,99,235,0.4);}
+
+.btn-s{
+  background:transparent;color:var(--accent);
+  padding:16px 40px;border-radius:4px;
+  font-family:'Space Mono',monospace;font-size:12px;font-weight:700;
+  text-decoration:none;letter-spacing:2px;
+  border:1px solid rgba(96,165,250,0.3);transition:all 0.2s;
+}
+.btn-s:hover{border-color:var(--accent);transform:translateY(-2px);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+
+/* BLUE DIVIDER */
+.divider{
+  height:4px;
+  background:linear-gradient(90deg,transparent,var(--blue),var(--accent),var(--blue),transparent);
+  position:relative;z-index:1;
+}
+
+/* COUNTDOWN */
+.countdown{
+  background:var(--dark2);padding:72px 24px;text-align:center;
+  position:relative;z-index:1;
+  border-top:1px solid rgba(37,99,235,0.2);
+  border-bottom:1px solid rgba(37,99,235,0.2);
+}
+.cnt-label{font-family:'Space Mono',monospace;font-size:10px;color:#f87171;letter-spacing:5px;text-transform:uppercase;margin-bottom:6px;}
+.cnt-sub{font-family:'Space Mono',monospace;font-size:11px;color:var(--gray);margin-bottom:48px;font-style:italic;}
+.timer-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
+.t-block{
+  background:var(--dark3);
+  border:1px solid rgba(37,99,235,0.3);
+  border-top:3px solid var(--blue);
+  padding:28px 36px 20px;border-radius:4px;min-width:130px;
+  position:relative;
+}
+.t-block::before{
+  content:'';position:absolute;inset:0;border-radius:4px;
+  background:radial-gradient(ellipse at top,rgba(37,99,235,0.08) 0%,transparent 70%);
+}
+.t-num{font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--accent);line-height:1;text-shadow:0 0 20px rgba(96,165,250,0.3);}
+.t-unit{font-family:'Space Mono',monospace;font-size:9px;color:var(--gray);letter-spacing:3px;text-transform:uppercase;margin-top:6px;}
+.cnt-note{margin-top:28px;font-family:'Space Mono',monospace;font-size:11px;color:var(--gray);font-style:italic;}
+.cnt-note span{color:#f87171;}
+
+/* SECTIONS COMMON */
+section{position:relative;z-index:1;}
+.sec{max-width:1100px;margin:0 auto;padding:100px 48px;}
+.sec-label{
+  font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);
+  letter-spacing:5px;text-transform:uppercase;margin-bottom:12px;
+  display:flex;align-items:center;gap:12px;
+}
+.sec-label::before{content:'';display:inline-block;width:24px;height:2px;background:var(--blue);}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,68px);line-height:1;letter-spacing:2px;margin-bottom:56px;}
+
+/* PROMISE */
+.promise-bg{background:var(--dark3);}
+.promise-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.p-card{
+  background:var(--dark2);padding:44px;
+  border:1px solid rgba(37,99,235,0.12);
+  position:relative;overflow:hidden;transition:border-color 0.3s;
+}
+/* Shield corner deco */
+.p-card::before{
+  content:'';position:absolute;top:0;left:0;
+  width:0;height:0;
+  border-left:40px solid rgba(37,99,235,0.15);
+  border-bottom:40px solid transparent;
+}
+.p-card:hover{border-color:rgba(37,99,235,0.35);}
+.p-card.danger{border-color:rgba(248,113,113,0.12);}
+.p-card.danger::before{border-left-color:rgba(248,113,113,0.12);}
+.p-card.danger:hover{border-color:rgba(248,113,113,0.3);}
+.p-day{font-family:'Space Mono',monospace;font-size:10px;color:var(--gray);letter-spacing:3px;margin-bottom:16px;}
+.p-card h3{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;margin-bottom:28px;color:var(--accent);}
+.p-card.danger h3{color:#f87171;}
+.p-list{list-style:none;display:flex;flex-direction:column;gap:14px;}
+.p-list li{font-family:'Space Mono',monospace;font-size:11px;color:var(--gray-light);display:flex;gap:14px;align-items:flex-start;line-height:1.7;}
+
+/* WHITEPAPER */
+.wp-bg{background:var(--dark);}
+.wp-inner{max-width:860px;}
+.wp-section{margin-bottom:56px;}
+.wp-section h3{
+  font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;
+  color:var(--accent);margin-bottom:16px;
+  padding-bottom:8px;border-bottom:1px solid rgba(37,99,235,0.2);
+}
+.wp-text{font-family:'DM Sans',sans-serif;font-size:15px;color:var(--gray-light);line-height:1.9;}
+.wp-text em{color:var(--white);font-style:normal;font-weight:600;}
+.wp-text strong{color:#f87171;}
+.wp-text br{display:block;margin:6px 0;}
+.wp-quote{
+  margin:24px 0;padding:20px 28px;
+  background:rgba(37,99,235,0.08);
+  border-left:3px solid var(--blue);
+  font-family:'Space Mono',monospace;font-size:13px;
+  color:var(--white);line-height:1.8;font-style:italic;
+}
+.wp-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:16px;}
+.wp-list li{
+  font-family:'Space Mono',monospace;font-size:12px;
+  color:var(--gray-light);display:flex;gap:12px;line-height:1.7;
+}
+.wp-compare{
+  display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:24px;
+}
+.wp-col{padding:24px;background:var(--dark2);border:1px solid rgba(37,99,235,0.1);}
+.wp-col h4{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;margin-bottom:16px;}
+.wp-col.bad h4{color:#f87171;}.wp-col.good h4{color:var(--accent);}
+.wp-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.wp-col ul li{font-family:'Space Mono',monospace;font-size:11px;color:var(--gray-light);display:flex;gap:10px;}
+
+/* TOKENOMICS */
+.tok-bg{background:var(--dark2);}
+.tok-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.tok-card{
+  background:var(--dark);padding:32px;
+  border:1px solid rgba(37,99,235,0.08);border-top:3px solid var(--blue);
+  transition:all 0.25s;position:relative;overflow:hidden;
+}
+.tok-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at top left,rgba(37,99,235,0.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.tok-card:hover{border-color:rgba(37,99,235,0.35);border-top-color:var(--accent);transform:translateY(-3px);}
+.tok-pct{font-family:'Bebas Neue',sans-serif;font-size:56px;color:var(--accent);line-height:1;position:relative;}
+.tok-name{font-family:'Space Mono',monospace;font-size:10px;color:var(--white);letter-spacing:2px;text-transform:uppercase;margin:10px 0 4px;position:relative;}
+.tok-amt{font-family:'Space Mono',monospace;font-size:9px;color:var(--gray);position:relative;}
+.tok-ul{margin-top:20px;display:inline-block;padding:5px 12px;border-radius:3px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;position:relative;border:1px solid;}
+.ul-g{background:rgba(34,197,94,0.1);color:#4ade80;border-color:rgba(34,197,94,0.25);}
+.ul-b{background:rgba(37,99,235,0.1);color:var(--accent);border-color:rgba(37,99,235,0.3);}
+.ul-r{background:rgba(248,113,113,0.1);color:#f87171;border-color:rgba(248,113,113,0.25);}
+
+/* BURN */
+.burn-bg{
+  background:var(--dark3);
+  border-top:1px solid rgba(37,99,235,0.15);
+  border-bottom:1px solid rgba(37,99,235,0.15);
+}
+.burn-inner{max-width:1100px;margin:0 auto;padding:100px 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.burn-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,5vw,60px);line-height:1;letter-spacing:2px;margin-bottom:36px;}
+.burn-list{list-style:none;display:flex;flex-direction:column;gap:14px;}
+.burn-list li{font-family:'Space Mono',monospace;font-size:11px;color:var(--gray-light);display:flex;gap:12px;line-height:1.7;}
+.burn-box{
+  background:rgba(37,99,235,0.07);border:1px solid rgba(37,99,235,0.2);
+  border-left:3px solid var(--blue);padding:22px 26px;margin-top:28px;
+}
+.burn-box-title{font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:2px;margin-bottom:14px;}
+.burn-formula{font-family:'Space Mono',monospace;font-size:11px;color:var(--white);line-height:2.2;}
+.burn-formula span{color:var(--accent);font-weight:700;}
+.burn-formula .fire{color:#f87171;}
+.burn-tracker{background:var(--dark2);border:1px solid rgba(37,99,235,0.2);border-top:3px solid var(--blue);padding:32px;}
+.btrk-title{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:3px;margin-bottom:24px;}
+.btrk-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(37,99,235,0.08);}
+.btrk-row:last-child{border-bottom:none;}
+.btrk-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--gray);letter-spacing:1px;}
+.btrk-val{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--white);}
+.btrk-val.red{color:#f87171;}.btrk-val.blue{color:var(--accent);}
+.burn-note{margin-top:16px;font-family:'Space Mono',monospace;font-size:10px;color:var(--gray);text-align:center;font-style:italic;line-height:1.8;}
+
+/* SCHEDULE */
+.sch-bg{background:var(--dark);}
+.sch-table{width:100%;border-collapse:collapse;font-family:'Space Mono',monospace;font-size:11px;}
+.sch-table th{text-align:left;padding:14px 20px;color:var(--accent);font-size:9px;letter-spacing:3px;text-transform:uppercase;border-bottom:2px solid rgba(37,99,235,0.2);background:rgba(37,99,235,0.04);}
+.sch-table td{padding:14px 20px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--gray-light);}
+.sch-table tr:hover td{background:rgba(37,99,235,0.03);}
+.sch-table tr.spl td{color:#f87171;font-weight:700;background:rgba(248,113,113,0.04);}
+.sch-table tr.spl td:first-child{border-left:3px solid #f87171;}
+.sch-table td.bc{color:#f87171;}.sch-table td.cc{color:var(--accent);}
+.pill{display:inline-block;padding:3px 10px;border-radius:3px;font-size:9px;letter-spacing:1px;border:1px solid;}
+.pr{background:rgba(248,113,113,0.1);color:#f87171;border-color:rgba(248,113,113,0.3);}
+.pg{background:rgba(34,197,94,0.1);color:#4ade80;border-color:rgba(34,197,94,0.3);}
+.pbl{background:rgba(37,99,235,0.1);color:var(--accent);border-color:rgba(37,99,235,0.3);}
+
+/* FAQ */
+.faq-bg{background:var(--dark2);}
+.faq-inner{max-width:760px;}
+.faq-item{border-bottom:1px solid rgba(37,99,235,0.1);padding:32px 0;}
+.faq-q{font-family:'Space Mono',monospace;font-size:13px;color:var(--accent);margin-bottom:14px;font-weight:700;}
+.faq-a{font-family:'DM Sans',sans-serif;font-size:15px;color:var(--gray-light);line-height:1.85;}
+.faq-a em{color:var(--white);font-style:normal;}
+
+/* COMMUNITY */
+.comm-bg{background:var(--dark3);}
+.comm-inner{max-width:1100px;margin:0 auto;padding:100px 48px;text-align:center;}
+.soc-grid{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:56px;}
+.soc-btn{
+  display:flex;align-items:center;gap:12px;padding:18px 32px;
+  border:1px solid rgba(37,99,235,0.2);border-top:2px solid var(--blue);
+  background:var(--dark2);text-decoration:none;color:var(--white);
+  font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;
+  transition:all 0.2s;border-radius:4px;
+}
+.soc-btn:hover{border-color:var(--blue);color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 24px rgba(37,99,235,0.15);}
+.soc-icon{font-size:22px;}
+
+/* FOOTER */
+footer{
+  background:var(--dark2);
+  border-top:1px solid rgba(37,99,235,0.2);
+  padding:48px;display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:20px;position:relative;z-index:1;
+}
+.foot-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--white);letter-spacing:3px;}
+.foot-logo span{color:var(--accent);}
+.foot-mid{font-family:'Space Mono',monospace;font-size:10px;color:var(--gray);text-align:center;line-height:2;}
+.foot-disc{font-family:'Space Mono',monospace;font-size:9px;color:rgba(100,116,139,0.5);text-align:right;max-width:280px;line-height:1.8;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--dark);}
+::-webkit-scrollbar-thumb{background:var(--blue);border-radius:4px;}
+
+@media(max-width:768px){
+  nav{padding:16px 20px;}nav ul{display:none;}
+  .promise-grid,.burn-inner,.wp-compare{grid-template-columns:1fr;gap:3px;}
+  .burn-inner{gap:48px;padding:72px 24px;}
+  .tok-grid{grid-template-columns:1fr 1fr;}
+  .sec{padding:72px 24px;}
+  footer{padding:32px 24px;flex-direction:column;text-align:center;}
+  .foot-disc{text-align:center;max-width:100%;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-shield"></div>
+    $<span>NOT</span>RUG
+  </div>
+  <ul>
+    <li><a href="#promise">Promise</a></li>
+    <li><a href="#whitepaper">Whitepaper</a></li>
+    <li><a href="#tokenomics">Tokens</a></li>
+    <li><a href="#burn">Burn</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#community" class="nav-cta">Join Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-shield-bg"></div>
+
+  <div class="hero-badge">
+    <span class="dot"></span>
+    SOLANA NETWORK &nbsp;·&nbsp; LIVE NOW &nbsp;·&nbsp; 1,000,000,000 SUPPLY
+  </div>
+
+  <!-- SHIELD LOGO -->
+  <div class="hero-shield-wrap">
+    <svg width="180" height="216" viewBox="0 0 180 216" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 0 40px rgba(37,99,235,0.6));">
+      <!-- Outer shield -->
+      <path d="M90 4L176 36V108Q176 168 90 212Q4 168 4 108V36Z" fill="#2563eb"/>
+      <!-- Inner shield -->
+      <path d="M90 16L164 44V108Q164 158 90 198Q16 158 16 108V44Z" fill="#1d4ed8"/>
+      <!-- Circle -->
+      <circle cx="90" cy="110" r="46" stroke="white" stroke-width="7" fill="none"/>
+      <!-- X -->
+      <line x1="58" y1="78" x2="122" y2="142" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      <line x1="122" y1="78" x2="58" y2="142" stroke="white" stroke-width="7" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <div class="hero-tagline-top">PROTECTED · LOCKED · SAFE</div>
+
+  <div class="hero-title">
+    <h1>$<span>NOT</span>RUG</h1>
+  </div>
+
+  <p class="hero-sub">
+    We will rug you.<br/>
+    <em>Just... not yet.</em><br/><br/>
+    The most honest project in crypto history.<br/>
+    <strong>Day 365. Mark your calendar. 🌴</strong>
+  </p>
+
+  <div class="hero-actions">
+    <a href="#community" class="btn-p">🛡️ Buy Presale</a>
+    <a href="#whitepaper" class="btn-s">Read Whitepaper →</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COUNTDOWN -->
+<section class="countdown">
+  <div class="cnt-label">⏳ Official Rug Countdown</div>
+  <div class="cnt-sub">"Starts on Launch Day. You'll know when." 🛡️</div>
+  <div class="timer-row">
+    <div class="t-block"><div class="t-num" id="days">365</div><div class="t-unit">Days</div></div>
+    <div class="t-block"><div class="t-num" id="hours">00</div><div class="t-unit">Hours</div></div>
+    <div class="t-block"><div class="t-num" id="minutes">00</div><div class="t-unit">Minutes</div></div>
+    <div class="t-block"><div class="t-num" id="seconds">00</div><div class="t-unit">Seconds</div></div>
+  </div>
+  <div style="margin-top:20px;">
+    <span style="font-family:'Space Mono',monospace;font-size:11px;background:rgba(37,99,235,0.15);border:1px solid rgba(96,165,250,0.3);color:var(--accent);padding:8px 20px;border-radius:100px;letter-spacing:3px;">
+      ⏸ PAUSED — AWAITING LAUNCH
+    </span>
+  </div>
+  <div class="cnt-note" style="margin-top:16px;">* After Day 365, we're on a beach. <span>You were warned.</span> 🏖️</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROMISE -->
+<section class="promise-bg" id="promise">
+  <div class="sec">
+    <div class="sec-label reveal">Our Promise</div>
+    <h2 class="sec-title reveal">What We<br/>Guarantee</h2>
+    <div class="promise-grid reveal">
+      <div class="p-card">
+        <div class="p-day">DAY 1 — DAY 364</div>
+        <h3>We're Here. 🛡️</h3>
+        <ul class="p-list">
+          <li><span>✅</span> Liquidity locked on-chain, verifiable</li>
+          <li><span>✅</span> All wallets visible — full transparency</li>
+          <li><span>✅</span> Weekly community updates, no ghosting</li>
+          <li><span>✅</span> Monthly burns, scheduled & announced</li>
+          <li><span>✅</span> Active development every week</li>
+          <li><span>✅</span> We answer DMs (unlike your ex)</li>
+          <li><span>✅</span> Zero surprise exits — you know the date</li>
+        </ul>
+      </div>
+      <div class="p-card danger">
+        <div class="p-day">DAY 365</div>
+        <h3>We're Gone. 🏖️</h3>
+        <ul class="p-list">
+          <li><span>🏃</span> [sound of running]</li>
+          <li><span>🚪</span> [door closing]</li>
+          <li><span>📵</span> [phone disconnected]</li>
+          <li><span>🌴</span> [tropical island noises]</li>
+          <li><span>🍹</span> [cocktail sounds]</li>
+          <li><span>💸</span> [wallet emptying sounds]</li>
+          <li><span>😎</span> [sunglasses emoji, permanently]</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHITEPAPER -->
+<section class="wp-bg" id="whitepaper">
+  <div class="sec">
+    <div class="wp-inner">
+      <div class="sec-label reveal">Whitepaper</div>
+      <h2 class="sec-title reveal">The Most Honest<br/>Whitepaper Ever Written</h2>
+
+      <div class="wp-section reveal">
+        <h3>Introduction</h3>
+        <p class="wp-text">
+          Dear Investor,<br/><br/>
+          Welcome to crypto. You've probably been rugged before. Maybe twice. Maybe last Tuesday.<br/><br/>
+          We are <em>$NOTRUG</em>. And we have something radical to offer you: <em>the truth.</em><br/><br/>
+          We will rug you. <strong>Just not yet.</strong><br/><br/>
+          Mark your calendar. Set a reminder. Call your mother. <em>Day 365. That's when we're gone.</em> 🌴
+        </p>
+        <div class="wp-quote">
+          "Others rug without warning. We rug with a countdown." ⏳
+        </div>
+      </div>
+
+      <div class="wp-section reveal">
+        <h3>The Problem With Crypto</h3>
+        <p class="wp-text">Every project makes the same promises. "Community first." "Diamond hands." "We'll never rug." Three days later, the dev wallet is empty and the Telegram is silent.</p>
+        <div class="wp-compare">
+          <div class="wp-col bad">
+            <h4>❌ OTHER PROJECTS</h4>
+            <ul>
+              <li><span>🚩</span> "We'll never rug" (they will)</li>
+              <li><span>🚩</span> Anonymous devs, zero accountability</li>
+              <li><span>🚩</span> Exit: surprise, 3am, no warning</li>
+              <li><span>🚩</span> Fake roadmaps, fake partnerships</li>
+              <li><span>🚩</span> Your trust: betrayed</li>
+            </ul>
+          </div>
+          <div class="wp-col good">
+            <h4>✅ $NOTRUG</h4>
+            <ul>
+              <li><span>🛡️</span> "We'll rug on Day 365" (we will)</li>
+              <li><span>🛡️</span> On-chain transparency, all visible</li>
+              <li><span>🛡️</span> Exit: scheduled, announced, Day 365</li>
+              <li><span>🛡️</span> Real tokenomics, real burn schedule</li>
+              <li><span>🛡️</span> Your trust: respected (for 364 days)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="wp-section reveal">
+        <h3>Our Solution</h3>
+        <p class="wp-text">
+          <em>Radical honesty.</em><br/><br/>
+          We are the first crypto project in history to tell you exactly when we're leaving. No rug pull surprises. No 3am exit. Just a countdown. A calendar date. A scheduled goodbye.<br/><br/>
+          Until Day 365, we operate as a fully transparent, deflationary, community-driven project. We lock liquidity. We burn tokens monthly. We show up.<br/><br/>
+          <em>After Day 365? A lovely tropical holiday. We'll think of you. Probably.</em> 🌴
+        </p>
+        <div class="wp-quote">
+          "Finally. A coin that doesn't rug. Until it does. On schedule."
+        </div>
+      </div>
+
+      <div class="wp-section reveal">
+        <h3>Deflationary Mechanics</h3>
+        <p class="wp-text">$NOTRUG is designed to decrease in supply over time, making every remaining token rarer and more valuable.</p>
+        <ul class="wp-list">
+          <li><span>🔥</span> <strong style="color:var(--white)">Genesis Burn:</strong> 50,000,000 NOTRUG burned immediately at launch</li>
+          <li><span>🔥</span> <strong style="color:var(--white)">Presale Burn:</strong> 5% of every presale purchase burned instantly</li>
+          <li><span>🔥</span> <strong style="color:var(--white)">Airdrop Burn:</strong> 5% of every airdrop claim burned instantly</li>
+          <li><span>🔥</span> <strong style="color:var(--white)">Monthly Burn:</strong> 10% of every monthly unlock burned permanently</li>
+          <li><span>📊</span> <strong style="color:var(--white)">Total estimated burn:</strong> ~122,500,000 NOTRUG over 364 days</li>
+        </ul>
+        <div class="wp-quote">
+          "The rug gets smaller every month. But we still pull it." 🏖️
+        </div>
+      </div>
+
+      <div class="wp-section reveal">
+        <h3>The Timeline</h3>
+        <ul class="wp-list">
+          <li><span>📅</span> <em>Day 0:</em> Genesis burn + team tokens unlocked. The journey begins.</li>
+          <li><span>📅</span> <em>Day 30:</em> Presale & airdrop tokens unlock. Community distributes. 5% burned.</li>
+          <li><span>📅</span> <em>Months 2–11:</em> Monthly unlocks with 10% burn. Steady, transparent, on-chain.</li>
+          <li><span>📅</span> <em>Day 364:</em> Set your reminder. Sell if you want. We won't judge.</li>
+          <li><span>📅</span> <em>Day 365:</em> 🏃🚪📵🌴🍹💸😎</li>
+        </ul>
+      </div>
+
+      <div class="wp-section reveal">
+        <h3>Risk Disclosure</h3>
+        <p class="wp-text">
+          This is not financial advice. $NOTRUG is a <em>satirical deflationary meme token</em> on Solana. We are transparent about our exit on Day 365.<br/><br/>
+          <strong>Sell before Day 364.</strong> Set a reminder. We are not responsible for your calendar management.<br/><br/>
+          <em>Crypto is risky. $NOTRUG is honest about that risk. That's the whole point.</em>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TOKENOMICS -->
+<section class="tok-bg" id="tokenomics">
+  <div class="sec">
+    <div class="sec-label reveal">Tokenomics</div>
+    <h2 class="sec-title reveal">Fair. Transparent.<br/>Honestly Beautiful.</h2>
+    <div class="tok-grid reveal">
+      <div class="tok-card">
+        <div class="tok-pct">50%</div>
+        <div class="tok-name">Liquidity Pool</div>
+        <div class="tok-amt">500,000,000 NOTRUG</div>
+        <span class="tok-ul ul-r">Streamflow locked · Monthly unlock · 10% burn</span>
+      </div>
+      <div class="tok-card">
+        <div class="tok-pct">10%</div>
+        <div class="tok-name">Presale</div>
+        <div class="tok-amt">100,000,000 NOTRUG</div>
+        <span class="tok-ul ul-b">Day 30 · 5% burn on buy</span>
+      </div>
+      <div class="tok-card">
+        <div class="tok-pct">10%</div>
+        <div class="tok-name">Airdrop</div>
+        <div class="tok-amt">100,000,000 NOTRUG</div>
+        <span class="tok-ul ul-b">Launch day · 5% burn on claim</span>
+      </div>
+      <div class="tok-card">
+        <div class="tok-pct">15%</div>
+        <div class="tok-name">Reserve</div>
+        <div class="tok-amt">150,000,000 NOTRUG</div>
+        <span class="tok-ul ul-r">Streamflow locked · Monthly unlock · 10% burn</span>
+      </div>
+      <div class="tok-card">
+        <div class="tok-pct">5%</div>
+        <div class="tok-name">Team</div>
+        <div class="tok-amt">50,000,000 NOTRUG</div>
+        <span class="tok-ul ul-g">Unlocked — we're honest</span>
+      </div>
+      <div class="tok-card">
+        <div class="tok-pct">5%</div>
+        <div class="tok-name">Genesis Burn 🔥</div>
+        <div class="tok-amt">50,000,000 NOTRUG</div>
+        <span class="tok-ul ul-g">Burned at launch</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BURN -->
+<section class="burn-bg" id="burn">
+  <div class="burn-inner">
+    <div>
+      <div class="sec-label reveal">Deflationary</div>
+      <h2 class="burn-title reveal">Every Buy<br/>Burns Supply.<br/><span style="color:#f87171;">Forever. 🔥</span></h2>
+      <ul class="burn-list reveal">
+        <li><span>🔥</span> Every presale purchase burns 5% instantly</li>
+        <li><span>🔥</span> Every airdrop claim burns 5% instantly</li>
+        <li><span>🔥</span> Every monthly unlock burns 10%</li>
+        <li><span>🔥</span> More buyers = less supply = your bag grows</li>
+        <li><span>📢</span> Every burn announced publicly on-chain</li>
+      </ul>
+      <div class="burn-box reveal">
+        <div class="burn-box-title">HOW IT WORKS — EXAMPLE</div>
+        <div class="burn-formula">
+          You buy <span>10,000</span> NOTRUG<br/>
+          → <span class="fire">500 burned instantly 🔥</span><br/>
+          → <span>9,500</span> arrives in your wallet<br/><br/>
+          Monthly unlock: <span>15M</span> tokens<br/>
+          → <span class="fire">1.5M burned 🔥</span><br/>
+          → <span>13.5M</span> enters circulation
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="burn-tracker">
+        <div class="btrk-title">🔥 BURN TRACKER</div>
+        <div class="btrk-row"><div class="btrk-label">INITIAL SUPPLY</div><div class="btrk-val">1,000,000,000</div></div>
+        <div class="btrk-row"><div class="btrk-label">GENESIS BURN</div><div class="btrk-val red">-50,000,000</div></div>
+        <div class="btrk-row"><div class="btrk-label">MONTHLY BURNS (est.)</div><div class="btrk-val red">-55,000,000</div></div>
+        <div class="btrk-row"><div class="btrk-label">PRESALE + AIRDROP</div><div class="btrk-val red">-17,500,000</div></div>
+        <div class="btrk-row"><div class="btrk-label">TOTAL BURNED</div><div class="btrk-val red">~122,500,000</div></div>
+        <div class="btrk-row"><div class="btrk-label">REAL FINAL SUPPLY</div><div class="btrk-val blue">~827,500,000</div></div>
+      </div>
+      <div class="burn-note">"The rug gets smaller every month.<br/>But we still pull it." 🏖️</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SCHEDULE -->
+<section class="sch-bg" id="schedule">
+  <div class="sec">
+    <div class="sec-label reveal">Unlock Schedule</div>
+    <h2 class="sec-title reveal">No Surprises.<br/>Ever.</h2>
+    <div class="reveal">
+    <table class="sch-table">
+      <thead>
+        <tr>
+          <th>Event</th>
+          <th>Unlocked</th>
+          <th>Burned 🔥</th>
+          <th>Into Circulation</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Day 0 — Genesis</td><td>100,000,000</td><td class="bc">50,000,000</td><td class="cc">50,000,000</td><td><span class="pill pg">Live</span></td></tr>
+        <tr><td>Day 0 — Airdrop</td><td>100,000,000</td><td class="bc">5,000,000</td><td class="cc">95,000,000</td><td><span class="pill pbl">Launch Day</span></td></tr>
+        <tr><td>Day 30 — Presale</td><td>100,000,000</td><td class="bc">5,000,000</td><td class="cc">95,000,000</td><td><span class="pill pbl">Upcoming</span></td></tr>
+        <tr><td>Month 2</td><td>15,000,000</td><td class="bc">1,500,000</td><td class="cc">13,500,000</td><td><span class="pill pr">Locked</span></td></tr>
+        <tr><td>Month 3</td><td>20,000,000</td><td class="bc">2,000,000</td><td class="cc">18,000,000</td><td><span class="pill pr">Locked</span></td></tr>
+        <tr><td>Month 4</td><td>25,000,000</td><td class="bc">2,500,000</td><td class="cc">22,500,000</td><td><span class="pill pr">Locked</span></td></tr>
+        <tr><td>Month 5</td><td>30,000,000</td><td class="bc">3,000,000</td><td class="cc">27,000,000</td><td><span class="pill pr">Locked</span></td></tr>
+        <tr><td>Month 6</td><td>35,000,000</td><td class="bc">3,500,000</td><td class="cc">31,500,000</td><td><span class="pill pr">Locked</span></td></tr>
+        <tr><td>Month 7</td><td>40,000,000</td><td class="bc">4,000,000</td><td class="cc">36,000,000</td><td><span class="pill pr">Locked</span></td></tr>
+        <tr><td>Month 8</td><td>45,000,000</td><td class="bc">4,500,000</td><td class="cc">40,500,000</td><td><span class="pill pr">Locked</span></td></tr>
+        <tr><td>Month 9</td><td>50,000,000</td><td class="bc">5,000,000</td><td class="cc">45,000,000</td><td><span class="pill pr">Locked</span></td></tr>
+        <tr><td>Month 10</td><td>55,000,000</td><td class="bc">5,500,000</td><td class="cc">49,500,000</td><td><span class="pill pr">Locked</span></td></tr>
+        <tr><td>Month 11</td><td>60,000,000</td><td class="bc">6,000,000</td><td class="cc">54,000,000</td><td><span class="pill pr">Locked</span></td></tr>
+        <tr class="spl"><td>🏖️ Day 365 — THE RUG</td><td>175,000,000</td><td>17,500,000</td><td>157,500,000</td><td><span class="pill pr">See You Never</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section class="faq-bg" id="faq">
+  <div class="sec">
+    <div class="faq-inner">
+      <div class="sec-label reveal">FAQ</div>
+      <h2 class="sec-title reveal">Questions We<br/>Actually Answer</h2>
+      <div class="faq-item reveal">
+        <div class="faq-q">"Is this a rug pull?"</div>
+        <div class="faq-a">Technically, it's a <em>scheduled</em> rug pull. The difference matters. We told you Day 365 from day one. That's called transparency.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">"Will I lose money?"</div>
+        <div class="faq-a">Sell before Day 365 and you're fine. The math is yours to do. We recommend setting a reminder. <em>We are serious about this.</em></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">"Why should I trust you?"</div>
+        <div class="faq-a">Because we're the only ones telling you the truth. Every other project says <em>"we'll never rug"</em> and disappears in 3 days. At least we're consistent.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">"Is this legal?"</div>
+        <div class="faq-a"><em>[consulting our lawyer]</em><br/><em>[lawyer is also on the island]</em></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">"What happens on Day 365?"</div>
+        <div class="faq-a">A lovely holiday. Probably somewhere tropical. We'll think of you. <em>Probably.</em> 🌴</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">"Why burn tokens every month?"</div>
+        <div class="faq-a">Because <em>every month your remaining tokens become rarer.</em> Less supply, same demand = higher price. We're deflationary by design. Even the rug shrinks over time.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMMUNITY -->
+<section class="comm-bg" id="community">
+  <div class="comm-inner">
+    <div class="sec-label reveal" style="justify-content:center;">Community</div>
+    <h2 class="sec-title reveal">Join Before<br/>Day 365 🏖️</h2>
+    <p class="reveal" style="font-family:'Space Mono',monospace;font-size:11px;color:var(--gray);line-height:2.2;max-width:480px;margin:0 auto;">
+      364 days. One honest project. Zero surprises.<br/>
+      <span style="color:var(--accent);">Others rug without warning.<br/>We rug with a countdown. ⏳</span>
+    </p>
+    <div class="soc-grid reveal">
+      <a href="https://twitter.com/NOTRUGfun" class="soc-btn" target="_blank"><span class="soc-icon">𝕏</span>@NOTRUGfun</a>
+      <a href="https://t.me/notrugfun" class="soc-btn" target="_blank"><span class="soc-icon">✈️</span>Telegram</a>
+      <a href="#" class="soc-btn" target="_blank"><span class="soc-icon">💬</span>Discord</a>
+      <a href="#" class="soc-btn" target="_blank"><span class="soc-icon">📊</span>DEXScreener</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">$<span>NOT</span>RUG</div>
+  <div class="foot-mid">
+    SOLANA NETWORK · 1,000,000,000 SUPPLY<br/>
+    <span style="color:#f87171;">DAY 365: WE'RE GONE 🏖️</span><br/>
+    <span style="color:var(--gray);font-size:9px;">notrug.io · @NOTRUGfun</span>
+  </div>
+  <div class="foot-disc">Not financial advice. Set your Day 364 reminder. We are not responsible for your calendar management.</div>
+</footer>
+
+<script>
+// Countdown paused — starts on Launch Day
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
